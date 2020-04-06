@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example.tutorial</groupId>
-	<artifactId>LEARNING</artifactId>
+	<artifactId>EmployeeService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>LEARNING</name>
+	<name>EmployeeService</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -64,3 +64,4 @@
 		</plugins>
 	</build>
 	</project>
+
