@@ -4,6 +4,7 @@ import com.example.tutorial.LEARNING.models.Employee;
 import com.example.tutorial.LEARNING.service.EmployeeService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -20,19 +21,19 @@ public class SimpleController {
         return "Heloo World";
     }
 
-    @GetMapping(value = "/employee/{empId}")
+    @GetMapping(value = "/employee/{empId}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public Employee getEmpName(@PathVariable("empId") int empId) throws ParseException, NotFoundException {
         final Employee employee =
                 employeeService.getEmployeeById(empId);
         return (employee);
     }
 
-    @GetMapping(value = "/employees")
+@RequestMapping(value = "/employees", method = RequestMethod.GET
+,produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAllEmployee(@RequestParam(required = false) String firstName,
-                                         @RequestParam(required = false) String designation)
+         @RequestParam(required = false) String designation)
             throws Exception {
-        System.out.println("firstName "+ firstName);
-        System.out.println("designation "+ designation);
         return employeeService.getAllEmployee(firstName, designation);
 
     }
@@ -40,5 +41,11 @@ public class SimpleController {
     @PostMapping(value = "/employees")
     public Long createEmployee(@RequestBody Employee bodyPar){
         return employeeService.createEmploye(bodyPar);
+    }
+
+    @PutMapping(value="/employees/{id}")
+    public Long updateEmployee(@PathVariable(value = "id") Long id,
+                @RequestBody final Employee employeeePutBody){
+        return employeeService.updateEmployee(id,employeeePutBody);
     }
 }

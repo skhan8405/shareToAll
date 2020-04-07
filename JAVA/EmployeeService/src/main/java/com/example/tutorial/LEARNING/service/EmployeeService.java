@@ -14,4 +14,6 @@ public interface EmployeeService {
                                   String designation) throws ParseException, NotFoundException, Exception;
 
     Long createEmploye(Employee employee);
+
+    Long updateEmployee(Long id, Employee employeeePutBody);
 }

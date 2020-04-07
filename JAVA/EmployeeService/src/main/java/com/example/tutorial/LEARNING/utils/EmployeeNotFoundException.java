@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class EmployeeExceptionHandler extends RuntimeException {
+public class EmployeeNotFoundException extends RuntimeException {
 
-    public EmployeeExceptionHandler(final String message){
+    public EmployeeNotFoundException(final String message){
     super(message);
         }
 }
