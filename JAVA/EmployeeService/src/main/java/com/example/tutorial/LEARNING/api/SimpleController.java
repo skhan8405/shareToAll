@@ -29,7 +29,7 @@ public class SimpleController {
         return (employee);
     }
 
-@RequestMapping(value = "/employees", method = RequestMethod.GET
+@RequestMapping(value = "/employee", method = RequestMethod.GET
 ,produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAllEmployee(@RequestParam(required = false) String firstName,
          @RequestParam(required = false) String designation)
@@ -38,14 +38,19 @@ public class SimpleController {
 
     }
 
-    @PostMapping(value = "/employees")
+    @PostMapping(value = "/employee")
     public Long createEmployee(@RequestBody Employee bodyPar){
         return employeeService.createEmploye(bodyPar);
     }
 
-    @PutMapping(value="/employees/{id}")
+    @PutMapping(value="/employee/{id}")
     public Long updateEmployee(@PathVariable(value = "id") Long id,
                 @RequestBody final Employee employeeePutBody){
         return employeeService.updateEmployee(id,employeeePutBody);
+    }
+
+    @DeleteMapping(value = "/employee/{id}")
+    public Employee deleteEmployee(@PathVariable(value = "id") Long id){
+        return employeeService.deleteEmployee(id);
     }
 }

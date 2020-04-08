@@ -16,4 +16,6 @@ public interface EmployeeService {
     Long createEmploye(Employee employee);
 
     Long updateEmployee(Long id, Employee employeeePutBody);
+
+    Employee deleteEmployee(Long id);
 }

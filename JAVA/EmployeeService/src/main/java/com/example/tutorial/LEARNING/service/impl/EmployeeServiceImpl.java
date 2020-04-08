@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -55,5 +56,16 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setDateOfBirth(employeeePutBody.getDateOfBirth());
             return employeeRepo.save(employee).getId();
         }).orElseGet(() -> employeeRepo.save(employeeePutBody).getId());
+    }
+
+    @Override
+    public Employee deleteEmployee(Long id) {
+        Optional<Employee> employeeToBeDeleted= employeeRepo.findById(id);
+        if(!employeeToBeDeleted.isPresent()){
+            throw new EmployeeNotFoundException("Resource to be deleted " +
+                    "NOT FOUND");
+        }
+        employeeRepo.deleteById(id);
+        return employeeToBeDeleted.get();
     }
 }
