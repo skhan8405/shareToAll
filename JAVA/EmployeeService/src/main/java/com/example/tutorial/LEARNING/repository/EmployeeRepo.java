@@ -3,7 +3,6 @@ package com.example.tutorial.LEARNING.repository;
 import com.example.tutorial.LEARNING.models.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +16,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
                     "(:designation is null or t.designation = :designation)",
             nativeQuery=true
     )
-    List<Employee> findByTitleAndDescription(@Param("firstName") String firstName,
+    List<Employee> findByfirstNameAndDesignation(@Param("firstName") String firstName,
                                              @Param("designation") String designation);
 
 }

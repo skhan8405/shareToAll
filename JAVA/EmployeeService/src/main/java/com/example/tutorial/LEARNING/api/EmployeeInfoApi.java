@@ -1,8 +1,11 @@
 package com.example.tutorial.LEARNING.api;
 
 import com.example.tutorial.LEARNING.models.Employee;
+import com.example.tutorial.LEARNING.models.TotalEmployeeInfo;
 import com.example.tutorial.LEARNING.service.EmployeeService;
 import javassist.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +14,12 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController()
-public class SimpleController {
+public class EmployeeInfoApi {
 
     @Autowired
     private EmployeeService employeeService;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeInfoApi.class);
 
     @GetMapping(value = "/name")
     public String getName() {
@@ -23,16 +28,17 @@ public class SimpleController {
 
     @GetMapping(value = "/employee/{empId}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Employee getEmpName(@PathVariable("empId") int empId) throws ParseException, NotFoundException {
-        final Employee employee =
+    public TotalEmployeeInfo getEmpName(@PathVariable("empId") int empId) throws ParseException, NotFoundException {
+        LOGGER.info("REQUESTED FOR EMPLOYEE DETAILS for ID " + empId);
+        final TotalEmployeeInfo employee =
                 employeeService.getEmployeeById(empId);
         return (employee);
     }
 
 @RequestMapping(value = "/employee", method = RequestMethod.GET
 ,produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getAllEmployee(@RequestParam(required = false) String firstName,
-         @RequestParam(required = false) String designation)
+    public List<TotalEmployeeInfo> getAllEmployee(@RequestParam(required = false) String firstName,
+                                                  @RequestParam(required = false) String designation)
             throws Exception {
         return employeeService.getAllEmployee(firstName, designation);
 
