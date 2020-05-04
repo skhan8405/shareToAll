@@ -85,9 +85,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeLocation getEmployeeLocationDetails(Long id) {
         EmployeeLocation returnValue=null;
-        for (EmployeeLocation employeeLocation : employeeLocationList) {
-            if(employeeLocation.getId().equals(id)){
-                returnValue= employeeLocation;
+        if(!CollectionUtils.isEmpty(employeeLocationList)){
+            for (EmployeeLocation employeeLocation : employeeLocationList) {
+                if(employeeLocation.getId().equals(id)){
+                    returnValue= employeeLocation;
+                }
             }
         }
         return returnValue;

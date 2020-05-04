@@ -1,7 +1,5 @@
 package com.example.tutorial.LEARNING.external;
 
-import com.example.tutorial.LEARNING.api.SimpleController;
-import com.example.tutorial.LEARNING.models.Employee;
 import com.example.tutorial.LEARNING.models.EmployeeLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +27,7 @@ public class ExternalEmployeeLocation {
 
 
     public List<EmployeeLocation> getEmployeeLocationViaExternal() {
-        ResponseEntity<List<EmployeeLocation>> empployeeLocationRepsonse;
+        ResponseEntity<List<EmployeeLocation>> empployeeLocationRepsonse=null;
         try {
             empployeeLocationRepsonse = restTemplate.exchange(
                     connectionConfig.getLocationEndPoint(),
@@ -40,7 +38,7 @@ public class ExternalEmployeeLocation {
         } catch (RestClientException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            return null;
+            System.out.println(empployeeLocationRepsonse);
         }
         if (empployeeLocationRepsonse != null && empployeeLocationRepsonse.hasBody()) {
             LOGGER.info("SuccessFully get employee Location "  + empployeeLocationRepsonse.getBody());

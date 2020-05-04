@@ -59,4 +59,54 @@ public class EmployeeInfoApi {
     public Employee deleteEmployee(@PathVariable(value = "id") Long id){
         return employeeService.deleteEmployee(id);
     }
-}
+
+    @GetMapping(value = "/payment")
+    public Object getPaymentOptions(){
+
+        return "{\n" +
+                "   \"paymentCategories\":[\n" +
+                "      {\n" +
+                "         \"paymentCategoryID\":\"1\",\n" +
+                "         \"paymentCategoryName_\":\"DISCOVER_CARD\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"paymentCategoryID\":\"2\",\n" +
+                "         \"paymentCategoryName_\":\"AMEX_CARD\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"paymentCategoryID\":\"3\",\n" +
+                "         \"paymentCategoryName_\":\"JCB_CARD\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"paymentCategoryID\":\"4\",\n" +
+                "         \"paymentCategoryName_\":\"CASH\"\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}";
+    }
+
+    @PostMapping(value = "/payment")
+    public Object postPayment(@RequestBody Object bodyPar)
+    {
+        System.out.println("bodyPar" + bodyPar);
+         return "{\n" +
+                 "   \"paymentCategories\":[\n" +
+                 "      {\n" +
+                 "         \"paymentCategoryID\":\"1\",\n" +
+                 "         \"paymentCategoryName_\":\"DISCOVER_CARD\"\n" +
+                 "      },\n" +
+                 "      {\n" +
+                 "         \"paymentCategoryID\":\"2\",\n" +
+                 "         \"paymentCategoryName_\":\"AMEX_CARD\"\n" +
+                 "      },\n" +
+                 "      {\n" +
+                 "         \"paymentCategoryID\":\"3\",\n" +
+                 "         \"paymentCategoryName_\":\"JCB_CARD\"\n" +
+                 "      },\n" +
+                 "      {\n" +
+                 "         \"paymentCategoryID\":\"4\",\n" +
+                 "         \"paymentCategoryName_\":\"CASH\"\n" +
+                 "      }\n" +
+                 "   ]\n" +
+                 "}";
+}}
