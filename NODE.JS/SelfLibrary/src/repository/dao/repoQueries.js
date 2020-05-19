@@ -1,7 +1,6 @@
 
  exports.QUERIES={
     getAllQuery : (queryParams)=>{
-       console.log("queryParams ", queryParams)
       var baseQuery = "SELECT * FROM library"
       if(queryParams.bookName){
          baseQuery = baseQuery + " WHERE bookName=?"

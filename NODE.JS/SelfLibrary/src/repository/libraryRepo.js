@@ -11,7 +11,6 @@ var connection=mySql.createConnection({
   database : databaseConnectionMap.DATABASE  
 })
 
-var getCallDataList=[];
 
 exports.getAll=(req, res)=>{
   console.log("GET CALL REVEIVED ");
@@ -29,7 +28,6 @@ exports.getAll=(req, res)=>{
           "No Books Available"
       });
     }
-    getCallDataList.push(data);
     return res.send(data);
   })
 }
@@ -39,10 +37,11 @@ exports.createBookInLibrary=(req, res)=>{
   var payLoad = payLoadGenerator(req.body);
   connection.query(repoQueries.QUERIES.createQuery, payLoad, (err, result)=>{
     if(err){
-      console.log("/*/*/ ", err);
-    }
+      res.status(500).send({
+        message: "SOME SQL PROBLEM In creating book in LIBRARY"
+      })   
+     }
     else{
-      console.log("------ ", result)
       return res.send(result)
     }
   })
@@ -83,4 +82,3 @@ const createFilterArray=(request)=>{
   return filterList;
   
 }
-exports.getCallDataList = getCallDataList

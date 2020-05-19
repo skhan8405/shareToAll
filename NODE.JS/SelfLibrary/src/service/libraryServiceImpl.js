@@ -6,8 +6,7 @@ exports.findAll=(req, res)=>{
 }
 
 exports.findOne=(req, res)=>{
-  var responseLibraryObject = libraryRepo.findBookById(req, res);
-  console.log("responseLibraryObject ",responseLibraryObject);
+  return libraryRepo.findBookById(req, res);
 } 
 
 exports.create=(req, res)=>{
