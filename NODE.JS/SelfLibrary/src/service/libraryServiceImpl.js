@@ -15,8 +15,9 @@ exports.create=(req, res)=>{
 
 exports.update=()=>{
 
+
 }
 
-exports.delete=()=>{
-
+exports.delete=(req,res)=>{
+  return libraryRepo.deleteBookById(req, res);
 }

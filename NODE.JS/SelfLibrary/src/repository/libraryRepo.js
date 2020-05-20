@@ -33,6 +33,7 @@ exports.getAll=(req, res)=>{
 }
 
 exports.createBookInLibrary=(req, res)=>{
+  console.log("RECIEVED REQUEST FOR CREATING BOOK WITH NAME ", req.body.bookName)
   validation(req, res);
   var payLoad = payLoadGenerator(req.body);
   connection.query(repoQueries.QUERIES.createQuery, payLoad, (err, result)=>{
@@ -48,10 +49,12 @@ exports.createBookInLibrary=(req, res)=>{
 }
 
 exports.findBookById=(req, res)=>{
-  console.log("req.param.bookId ", req.params.bookId)
+  console.log("GET REQUEST RECEIVED FOR BOOK WITH ID : ", req.params.bookId)
   connection.query(repoQueries.QUERIES.findByIdQuery + req.params.bookId, (err, result)=>{
     if(err){
-      console.log("/*/*/ ", err);
+      res.status(500).send({
+        message: "SOME SQL PROBLEM In GETTING book in LIBRARY with id " + req.params.bookId
+      })
     }
     else{
       if(result.length>0){
@@ -62,10 +65,29 @@ exports.findBookById=(req, res)=>{
           message: "Required Book with id : " + req.params.bookId + " is not found!"
         })
       }
-      
     }
   })
 
+}
+
+exports.deleteBookById=(req, res)=>{
+  connection.query(repoQueries.QUERIES.deleteByIdQuery + req.params.bookId , (err, data)=>{
+    if(err){
+      res.status(500).send({
+        message : err.message ||
+           "Database Problem in Deleting Book with id : " + req.params.bookId
+      })
+    }      
+    if(data.affectedRows === 1){
+      return res.send(data);
+    }
+    else{
+      res.status(404).send({
+        message: "Required Book TO BE DELETED with id : " 
+        + req.params.bookId + " is not found!" 
+      })
+    }
+  });
 }
 
 const createFilterArray=(request)=>{

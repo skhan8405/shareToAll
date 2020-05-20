@@ -25,6 +25,7 @@
       return baseQuery;
     },
     createQuery: "INSERT INTO library SET ?",
-    findByIdQuery: "SELECT * FROM library where bookId="
+    findByIdQuery: "SELECT * FROM library where bookId=",
+    deleteByIdQuery : "DELETE FROM library where bookId="
  };
 
