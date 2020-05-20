@@ -9,7 +9,7 @@ app.post("/library", Library.create);
 
 app.put("/library/:bookId");
 
-app.delete("/library/:bookId");
+app.delete("/library/:bookId" , Library.delete);
 
 }
 
