@@ -7,7 +7,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function CustomDatePicker() {
+export default function CustomDatePicker(props) {
   // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [error, setError]= React.useState(false);
@@ -18,6 +18,7 @@ export default function CustomDatePicker() {
     }else{
       setSelectedDate(date);
       setError(false);
+      props.handleDateChange(date)
     }
   };
 
@@ -28,7 +29,7 @@ export default function CustomDatePicker() {
           disableToolbar
           error={error}
           variant="inline"
-          format="MM/dd/yyyy"
+          format="dd-MM-yyyy"
           margin="normal"
           id="date-picker-inline"
           label="Date Of Birth"
