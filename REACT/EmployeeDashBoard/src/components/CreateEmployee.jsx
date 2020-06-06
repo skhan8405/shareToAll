@@ -19,6 +19,8 @@ class CreateEmployeeComponent extends React.Component {
     this.state = {
       isOpen: false
     }
+    this.child = React.createRef();
+
   }
   handleClose = () => {
     console.log("DIALOG CLOSED");
@@ -27,6 +29,13 @@ class CreateEmployeeComponent extends React.Component {
     })
   }
 
+  handleSubmitAction=()=>{
+    console.log("SAVED CLICKED");
+    this.child.current.collectSavePayLoad("XSC");
+    // this.setState({
+    //   isOpen: false
+    // })
+  }
   handleOpen = () => {
     console.log("DIALOG OPEN");
     this.setState({
@@ -57,10 +66,10 @@ class CreateEmployeeComponent extends React.Component {
             </IconButton>
           </MuiDialogTitle>
           <MuiDialogContent dividers>
-            <InputForm />
+            <InputForm ref={this.child}/>
           </MuiDialogContent>
           <MuiDialogActions>
-            <Button autoFocus onClick={() => this.handleClose()} color="primary">
+            <Button autoFocus onClick={() => this.handleSubmitAction()} color="primary">
               Save changes
           </Button>
           </MuiDialogActions>
